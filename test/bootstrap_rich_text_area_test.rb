@@ -3,7 +3,7 @@ require_relative "./test_helper"
 if ::Rails::VERSION::STRING > "6"
   class BootstrapRichTextAreaTest < ActionView::TestCase
     tests ActionText::TagHelper
-    include BootstrapForm::ActionViewExtensions::FormHelper
+    include BootstrapForm4::ActionViewExtensions::FormHelper
 
     setup :setup_test_fixture
 

@@ -1,7 +1,7 @@
 require_relative "./test_helper"
 
 class BootstrapFieldsTest < ActionView::TestCase
-  include BootstrapForm::ActionViewExtensions::FormHelper
+  include BootstrapForm4::ActionViewExtensions::FormHelper
 
   setup :setup_test_fixture
 
@@ -111,7 +111,7 @@ class BootstrapFieldsTest < ActionView::TestCase
       </div>
     </form>
     HTML
-    assert_equivalent_xml expected, bootstrap_form_for(@user) { |f| f.file_field(:misc) }
+    assert_equivalent_xml expected, bootstrap_form4_for(@user) { |f| f.file_field(:misc) }
   end
 
   test "hidden fields are supported" do
@@ -314,7 +314,7 @@ class BootstrapFieldsTest < ActionView::TestCase
   test "bootstrap_form_for helper works for associations" do
     @user.address = Address.new(street: "123 Main Street")
 
-    output = bootstrap_form_for(@user) do |f|
+    output = bootstrap_form4_for(@user) do |f|
       f.fields_for :address do |af|
         af.text_field(:street)
       end
@@ -335,7 +335,7 @@ class BootstrapFieldsTest < ActionView::TestCase
   test "bootstrap_form_for helper works for serialized hash attributes" do
     @user.preferences = { favorite_color: "cerulean" }
 
-    output = bootstrap_form_for(@user) do |f|
+    output = bootstrap_form4_for(@user) do |f|
       f.fields_for :preferences do |builder|
         builder.text_field :favorite_color, value: @user.preferences[:favorite_color]
       end
@@ -356,7 +356,7 @@ class BootstrapFieldsTest < ActionView::TestCase
   test "fields_for correctly passes horizontal style from parent builder" do
     @user.address = Address.new(street: "123 Main Street")
 
-    output = bootstrap_form_for(@user, layout: :horizontal, label_col: "col-sm-2", control_col: "col-sm-10") do |f|
+    output = bootstrap_form4_for(@user, layout: :horizontal, label_col: "col-sm-2", control_col: "col-sm-10") do |f|
       f.fields_for :address do |af|
         af.text_field(:street)
       end
@@ -380,7 +380,7 @@ class BootstrapFieldsTest < ActionView::TestCase
     @user.address = Address.new(street: "123 Main Street")
 
     # NOTE: This test works with even if you use `fields_for_without_bootstrap`
-    output = bootstrap_form_for(@user, layout: :inline) do |f|
+    output = bootstrap_form4_for(@user, layout: :inline) do |f|
       f.fields_for :address do |af|
         af.text_field(:street)
       end
@@ -402,12 +402,12 @@ class BootstrapFieldsTest < ActionView::TestCase
     test "fields correctly uses options from parent builder" do
       @user.address = Address.new(street: "123 Main Street")
 
-      bootstrap_form_with(model: @user,
-                          control_col: "control-style",
-                          inline_errors: false,
-                          label_col: "label-style",
-                          label_errors: true,
-                          layout: :inline) do |f|
+      bootstrap_form4_with(model: @user,
+                           control_col: "control-style",
+                           inline_errors: false,
+                           label_col: "label-style",
+                           label_errors: true,
+                           layout: :inline) do |f|
         f.fields :address do |af|
           af.text_field(:street)
           assert_equal "control-style", af.control_col
@@ -423,12 +423,12 @@ class BootstrapFieldsTest < ActionView::TestCase
   test "fields_for_without_bootstrap does not use options from parent builder" do
     @user.address = Address.new(street: "123 Main Street")
 
-    bootstrap_form_for(@user,
-                       control_col: "control-style",
-                       inline_errors: false,
-                       label_col: "label-style",
-                       label_errors: true,
-                       layout: :inline) do |f|
+    bootstrap_form4_for(@user,
+                        control_col: "control-style",
+                        inline_errors: false,
+                        label_col: "label-style",
+                        label_errors: true,
+                        layout: :inline) do |f|
       f.fields_for_without_bootstrap :address do |af|
         af.text_field(:street)
         assert_not_equal "control-style", af.control_col

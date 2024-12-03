@@ -13,11 +13,11 @@ Rails.backtrace_cleaner.remove_silencers!
 class ActionView::TestCase
   def setup_test_fixture
     @user = User.new(email: "steve@example.com", password: "secret", comments: "my comment")
-    @builder = BootstrapForm::FormBuilder.new(:user, @user, self, {})
-    @horizontal_builder = BootstrapForm::FormBuilder.new(:user, @user, self,
-                                                         layout: :horizontal,
-                                                         label_col: "col-sm-2",
-                                                         control_col: "col-sm-10")
+    @builder = BootstrapForm4::FormBuilder.new(:user, @user, self, {})
+    @horizontal_builder = BootstrapForm4::FormBuilder.new(:user, @user, self,
+                                                          layout: :horizontal,
+                                                          label_col: "col-sm-2",
+                                                          control_col: "col-sm-10")
 
     I18n.backend.store_translations(:en,
                                     activerecord: {
@@ -37,7 +37,7 @@ class ActionView::TestCase
   # Originally only used in one test file but placed here in case it's needed in others in the future.
   def form_with_builder
     builder = nil
-    bootstrap_form_with(model: @user) { |f| builder = f }
+    bootstrap_form4_with(model: @user) { |f| builder = f }
     builder
   end
 

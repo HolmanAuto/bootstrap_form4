@@ -1,7 +1,7 @@
 require_relative "./test_helper"
 
 class SpecialFormClassModelsTest < ActionView::TestCase
-  include BootstrapForm::ActionViewExtensions::FormHelper
+  include BootstrapForm4::ActionViewExtensions::FormHelper
 
   test "Anonymous models are supported for form builder" do
     user_klass = Class.new(User)
@@ -10,9 +10,9 @@ class SpecialFormClassModelsTest < ActionView::TestCase
     end
 
     @user = user_klass.new(email: "steve@example.com", password: "secret", comments: "my comment")
-    @builder = BootstrapForm::FormBuilder.new(:user, @user, self, {})
-    @horizontal_builder = BootstrapForm::FormBuilder.new(:user, @user, self, layout: :horizontal, label_col: "col-sm-2",
-                                                                             control_col: "col-sm-10")
+    @builder = BootstrapForm4::FormBuilder.new(:user, @user, self, {})
+    @horizontal_builder = BootstrapForm4::FormBuilder.new(:user, @user, self, layout: :horizontal, label_col: "col-sm-2",
+                                                          control_col: "col-sm-10")
     I18n.backend.store_translations(:en, activerecord: {
                                       help: {
                                         user: { password: "A good password should be at least six characters long" }
@@ -30,9 +30,9 @@ class SpecialFormClassModelsTest < ActionView::TestCase
 
   test "Nil models are supported for form builder" do
     @user = nil
-    @builder = BootstrapForm::FormBuilder.new(:user, @user, self, {})
-    @horizontal_builder = BootstrapForm::FormBuilder.new(:user, @user, self, layout: :horizontal, label_col: "col-sm-2",
-                                                                             control_col: "col-sm-10")
+    @builder = BootstrapForm4::FormBuilder.new(:user, @user, self, {})
+    @horizontal_builder = BootstrapForm4::FormBuilder.new(:user, @user, self, layout: :horizontal, label_col: "col-sm-2",
+                                                          control_col: "col-sm-10")
     I18n.backend.store_translations(:en, activerecord: {
                                       help: {
                                         user: { password: "A good password should be at least six characters long" }
@@ -52,9 +52,9 @@ class SpecialFormClassModelsTest < ActionView::TestCase
     user_klass = FauxUser
 
     @user = user_klass.new(email: "steve@example.com", password: "secret", comments: "my comment")
-    @builder = BootstrapForm::FormBuilder.new(:user, @user, self, {})
-    @horizontal_builder = BootstrapForm::FormBuilder.new(:user, @user, self, layout: :horizontal, label_col: "col-sm-2",
-                                                                             control_col: "col-sm-10")
+    @builder = BootstrapForm4::FormBuilder.new(:user, @user, self, {})
+    @horizontal_builder = BootstrapForm4::FormBuilder.new(:user, @user, self, layout: :horizontal, label_col: "col-sm-2",
+                                                          control_col: "col-sm-10")
     I18n.backend.store_translations(:en, activerecord: {
                                       help: {
                                         faux_user: { password: "A good password should be at least six characters long" }
